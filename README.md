@@ -72,6 +72,7 @@ You just quit.
 
 ## **What will happen in the future?**
 It should do these things:
+* should be good in all situations
 * alternative for `.eval()`
 * Encrypt and decrypt your password
 * verify by tiping your masterkey and/or 2FA (2FA is only an option)
