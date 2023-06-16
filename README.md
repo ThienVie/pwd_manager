@@ -58,13 +58,11 @@ Alias: alias/google.what
 ------------------------------------------
 Username: Thien
 Password: 1234567890
-```
-I will just ask you one more time.
-```
+
 Are you sure you want to delete it: [y/n]
 ```
+I will just ask you one more time.
 You only has two options: `y` for 'yes' and `n` for 'no'.
-
 
 If you enter y, then you have to wait for 4 seconds. It only checks, if it has been deleted or not.
 Don't worry. The password is only in the trashcan. You can recover it.
