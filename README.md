@@ -35,7 +35,7 @@ Password is successfully added/updated!
 ```
 **!!! Please, remember that I am still learning Python. That means it takes time until this programm can encrypt and decrypt.**
 ### **Get Password From Alias**
-In this option you can see your passwords and username. Just write one of your alias.
+In this option you can see your passwords and username. Just write one of your aliases.
 ```
 Enter your choice: 2
 Alias: alias/google.what?
