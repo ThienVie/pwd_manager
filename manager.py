@@ -1,9 +1,21 @@
 import os
 import time
 passwords = {}
+
+# ------------- add folder ---------------
+
+def add_folder():
+    path = '.passwords'
+    if os.path.exists(path):
+        return True
+    else:
+        return False
+
 # ------------ add passwords -------------
 
 def add_password():
+    print("------------------------------------------")
+    print("If you want to stop this process, then you can press 'controll^ + z' (Mac)")
     alias = str(input("Alias: "))
     username = str(input("Username: "))
     password = str(input("Password: "))
@@ -11,7 +23,7 @@ def add_password():
     with open(f'.passwords/{alias}.key', 'w') as f:
         f.write(str(passwords[alias]))
     print("------------------------------------------")
-    print("Password was successfully updated!")
+    print("Password is successfully updated!")
     print()
 
 # -------------- get passwords --------------
@@ -66,47 +78,51 @@ def del_password():
             print(f"Password: {password}")
             print()
             thinking = input("Are you sure you want to delete it: [y/n] ")
+            print("------------------------------------------")
             if thinking == "y":
-                os.remove(alias)
-                print(f'Delete {alias}')
-                print("Wait 5 seconds")
-                time.sleep(1)
+                os.remove(file)
+                print(f'{alias} will be deleted.')
+                print("Wait 4 seconds")
+                time.sleep(2)
                 print("Making sure that it's deleted.")
-                time.sleep(4)
-                if os.path.exists(alias):
-                    print("------------------------------------------")
-                    print("Please, delete it manually.")
-            elif thinking == "n":
+                time.sleep(2)
                 print("------------------------------------------")
+                if os.path.exists(alias):
+                    print("Please, delete it manually.")
+                else:
+                    print(f"Alias '{alias}' has been deleted.")
+            elif thinking == "n":
                 print('That might be a good choice.')
             else:
-                print("------------------------------------------")
                 print("You wrote something wrong. IDK, what you were tiping, but it counts as a 'no' anyway.")
             print()
     else:
         print("------------------------------------------")
-        print('Since when was this website created?')
+        print('Since when was this alias created?')
         print()
 
 # ----------- combine everything ------------
 
 while True:
-    print("1. Add/Change Alias [a/c]")
-    print("2. Get Password From Alias [get]")
-    print("3. Show All Aliases[sall]")
-    print("4. Remove Alias[rm]")
-    print("5. Quit[q]")
+    if add_folder() == False:
+        os.makedirs('.passwords')
+    print()
+    print("1. Add/Update Alias")
+    print("2. Get Password From Alias")
+    print("3. Show All Aliases")
+    print("4. Remove Alias")
+    print("5. Quit")
     choice = input("Enter your choice: ")
 
-    if choice == "1" or 'a' or 'c':
+    if choice == "1":
         add_password()
-    elif choice == "2" or 'get':
+    elif choice == "2":
         get_password()
-    elif choice == "3" or 'sall':
+    elif choice == "3":
         all_password()
-    elif choice == "4" or 'rm':
+    elif choice == "4":
         del_password()
-    elif choice == "5" or 'q':
+    elif choice == "5":
         break
     else:
         print("------------------------------------------")
