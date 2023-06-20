@@ -32,7 +32,7 @@ def add_password():
     with open(f'.passwords/{alias}.key', 'w') as f:
         f.write(str(passwords[alias]))
     print("------------------------------------------")
-    print("Password is successfully updated!")
+    print("Password is successfully added/updated!")
     print()
 
 # get passwords
@@ -40,17 +40,20 @@ def add_password():
 def get_password():
         alias = input("Alias: ")
         print("------------------------------------------")
-        if exist(alias):
-            with open(f'.passwords/{alias}.key', 'r') as f:
-                password_data = f.read()
-                password_dict = json.loads(password_data.replace("'", '"'))
-                password_dict = password_dict[alias]
-                username = password_dict["Username"]
-                password = password_dict["Password"]
-                print(f"Username: {username}")
-                print(f"Password: {password}")
-        else:
-            print('Are you sure that it really exist?')
+        try:
+            if exist(alias):
+                with open(f'.passwords/{alias}.key', 'r') as f:
+                    password_data = f.read()
+                    password_dict = json.loads(password_data.replace("'", '"'))
+                    password_dict = password_dict[alias]
+                    username = password_dict["Username"]
+                    password = password_dict["Password"]
+                    print(f"Username: {username}")
+                    print(f"Password: {password}")
+            else:
+                print('Are you sure that it really exist?')
+        except KeyError:
+            print("Yeah, please remembder that I wrote 'that most operating systems are case-intensitive.'")
         print()
 
 # show all aliases
