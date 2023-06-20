@@ -50,7 +50,9 @@ It will show all of your aliases
 ```
 Enter your choice: 3
 ------------------------------------------
-['google', 'alias/google.what','Hi Github']
+google
+alias/google.what
+Hi Github
 ```
 ### **Remove Alias**
 You will remove one of your alias.
