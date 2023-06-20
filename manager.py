@@ -1,8 +1,19 @@
 import os
 import time
+import json
 passwords = {}
 
-# ------------- add folder ---------------
+# if file exist, return True or else False
+
+def exist(alias):
+    f'.passwords/{alias}.key'
+    if os.path.exists(f'.passwords/{alias}.key'):
+        return True
+    else:
+        return False
+
+
+# add folder
 
 def add_folder():
     path = '.passwords'
@@ -11,7 +22,7 @@ def add_folder():
     else:
         return False
 
-# ------------ add passwords -------------
+# add passwords
 
 def add_password():
     print("------------------------------------------")
@@ -26,67 +37,56 @@ def add_password():
     print("Password is successfully updated!")
     print()
 
-# -------------- get passwords --------------
+# get passwords
 
 def get_password():
         alias = input("Alias: ")
-        if os.path.exists(f'.passwords/{alias}.key'):
+        print("------------------------------------------")
+        if exist(alias):
             with open(f'.passwords/{alias}.key', 'r') as f:
                 password_data = f.read()
-                password_dict = eval(password_data)
-            if alias in password_dict:
+                password_dict = json.loads(password_data.replace("'", '"'))
                 password_dict = password_dict[alias]
                 username = password_dict["Username"]
                 password = password_dict["Password"]
-                print("------------------------------------------")
                 print(f"Username: {username}")
                 print(f"Password: {password}")
-            else:
-                print("------------------------------------------")
-                print("Alias is not found. Make sure that you wrote everything.")
-            print()
         else:
-            print("------------------------------------------")
             print('Are you sure that it really exist?')
-            print()
-# -------------- all passwords ---------------
+        print()
+
+# show all aliases
 
 def all_password():
+    print("------------------------------------------")
     files = []
     for file in os.listdir('.passwords'):
-        file = file.replace(".key", '')
-        files.append(file)
-    print("------------------------------------------")
-    print(files)
+        x = file.split(".")
+        le = len(x)
+        del x[le-1]
+        files = '.'.join(x)
+        print(files)
     print()
 
-# ------------- delete password --------------
+# delete alias
 
 def del_password():
     alias = str(input("Alias: "))
-    file = f'.passwords/{alias}.key'
-    if os.path.exists(file):
-        with open(f'{file}', 'r') as f:
+    print("------------------------------------------")
+    if exist(alias):
+        with open(f'.passwords/{alias}.key', 'r') as f:
             password_data = f.read()
-            password_dict = eval(password_data)
-        if alias in password_dict:
+            password_dict = json.loads(password_data.replace("'", '"'))
             password_dict = password_dict[alias]
             username = password_dict["Username"]
             password = password_dict["Password"]
-            print("------------------------------------------")
             print(f"Username: {username}")
             print(f"Password: {password}")
             print()
             thinking = input("Are you sure you want to delete it: [y/n] ")
             print("------------------------------------------")
             if thinking == "y":
-                os.remove(file)
-                print(f'{alias} will be deleted.')
-                print("Wait 4 seconds")
-                time.sleep(2)
-                print("Making sure that it's deleted.")
-                time.sleep(2)
-                print("------------------------------------------")
+                os.remove(f'.passwords/{alias}.key')
                 if os.path.exists(alias):
                     print("Please, delete it manually.")
                 else:
@@ -97,11 +97,10 @@ def del_password():
                 print("You wrote something wrong. IDK, what you were tiping, but it counts as a 'no' anyway.")
             print()
     else:
-        print("------------------------------------------")
         print('Since when was this alias created?')
         print()
 
-# ----------- combine everything ------------
+# combine everything
 
 while True:
     if add_folder() == False:

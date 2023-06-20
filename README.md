@@ -34,6 +34,8 @@ You added a new alias for your new password and you are finished:
 Password is successfully added/updated!
 ```
 **!!! Please, remember that I am still learning Python. That means it takes time until this programm can encrypt and decrypt.**
+
+**!!! Also remember that** ***most*** **operating systems are case-intensitive. This means that 'Hello.txt' and 'hello.txt' might be treathed as the same filename.**
 ### **Get Password From Alias**
 In this option you can see your passwords and username. Just write one of your aliases.
 ```
@@ -84,7 +86,7 @@ This is my plan to finish this project. You can follow me by looking at my plan.
 ✅ | My plan
 :-- | :--
 ❌ | Looking for all possible situations
-❌ | Alternatives for `.eval()`
+✅ | Alternatives for `.eval()`
 ❌ | Encrypt / Decrypt
 ❌ | Masterkey
 ❌ | 2FA (Optional)
