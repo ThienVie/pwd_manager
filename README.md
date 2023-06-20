@@ -33,7 +33,7 @@ You added a new alias for your new password and you are finished:
 ------------------------------------------
 Password is successfully added/updated!
 ```
-**!!! Please, remember that I am still learning Python. That means it takes time until this programm can encrypt and decrypt.**
+**!!! Please, remember that I am still learning Python. It means it takes time until this programm can encrypt and decrypt.**
 
 **!!! Also remember that** ***most*** **operating systems are case-intensitive. This means that 'Hello.txt' and 'hello.txt' might be treathed as the same filename.**
 ### **Get Password From Alias**
