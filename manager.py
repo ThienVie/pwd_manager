@@ -1,5 +1,4 @@
 import os
-import time
 import json
 passwords = {}
 
@@ -11,7 +10,6 @@ def exist(alias):
         return True
     else:
         return False
-
 
 # add folder
 
