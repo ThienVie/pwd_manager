@@ -53,7 +53,7 @@ def get_password():
             else:
                 print('Are you sure that it really exist?')
         except KeyError:
-            print("Yeah, please remembder that I wrote 'that most operating systems are case-intensitive.'")
+            print("Yeah, please remember that I wrote 'that most operating systems are case-intensitive.'")
         print()
 
 # show all aliases
