@@ -53,29 +53,6 @@ with open('.passwords/passwords.key', 'r') as f:
 #     print("Password is successfully added/updated!")
 #     print()
 
-<<<<<<< Updated upstream
-def get_password():
-        alias = input("Alias: ")
-        print("------------------------------------------")
-        try:
-            if exist(alias):
-                with open(f'.passwords/{alias}.key', 'r') as f:
-                    password_data = f.read()
-                    password_dict = json.loads(password_data.replace("'", '"'))
-                    password_dict = password_dict[alias]
-                    username = password_dict["Username"]
-                    password = password_dict["Password"]
-                    print(f"Username: {username}")
-                    print(f"Password: {password}")
-            else:
-                print('Are you sure that it really exist?')
-        except KeyError:
-            print("Yeah, please remember that I wrote 'that most operating systems are case-intensitive.'")
-        print()
-=======
-# # get passwords
->>>>>>> Stashed changes
-
 # def get_password():
 #         alias = input("Alias: ")
 #         print("------------------------------------------")
