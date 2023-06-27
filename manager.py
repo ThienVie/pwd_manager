@@ -79,38 +79,35 @@ def add_password():
     print(answer)
     print()
 
-# def get_password():
-#         alias = input("Alias: ")
-#         print("------------------------------------------")
-#         try:
-#             if exist(alias):
-#                 with open('.passwords/passwords.key', 'r') as f:
-#                     password_data = f.read()
-#                     password_dict = json.loads(password_data.replace("'", '"'))
-#                     print(password_dict)
-#                     # password_dict = password_dict[alias]
-#                     # username = password_dict["Username"]
-#                     # password = password_dict["Password"]
-#                     # print(f"Username: {username}")
-#                     # print(f"Password: {password}")
-#             else:
-#                 print('Are you sure that it really exist?')
-#         except KeyError:
-#             print("Yeah, please remembder that I wrote 'that most operating systems are case-intensitive.'")
-#         print()
+def get_password():
+        alias = input("Alias: ")
+        print("------------------------------------------")
+        print("------------------------------------------")
+        if exist(alias):
+            with open('.passwords/passwords.key', 'r') as f:
+                password_data = f.read()
+                password_dict = json.loads(password_data.replace("'", '"'))
+                password_dict = password_dict[alias]
+                username = password_dict["Username"]
+                password = password_dict["Password"]
+                print(f"Username: {username}")
+                print(f"Password: {password}")
+        else:
+            print('Are you sure that it really exist?')
+        print()
 
-# # show all aliases
+# show all aliases
 
-# def all_password():
-#     print("------------------------------------------")
-#     files = []
-#     for file in os.listdir('.passwords'):
-#         x = file.split(".")
-#         le = len(x)
-#         del x[le-1]
-#         files = '.'.join(x)
-#         print(files)
-#     print()
+def all_password():
+    print("------------------------------------------")
+    with open('.passwords/passwords.key', 'r') as f:
+        password_data = f.read()
+        password_dict = json.loads(password_data.replace("'", '"'))
+        dict = password_dict.keys()
+        print("All aliases:")
+    for l in dict:
+        print(l)
+    print()
 
 # # delete alias
 
@@ -159,10 +156,10 @@ while True:
 
     if choice == "1":
         add_password()
-    # elif choice == "2":
-    #     get_password()
-    # elif choice == "3":
-    #     all_password()
+    elif choice == "2":
+        get_password()
+    elif choice == "3":
+        all_password()
     # elif choice == "4":
     #     del_password()
     elif choice == "5":
