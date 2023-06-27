@@ -1,7 +1,7 @@
 import os
 import json
 
-# if file exist, return True or else False
+# test
 
 with open('.passwords/passwords.key', 'r') as f:
     try:
@@ -23,7 +23,7 @@ with open('.passwords/passwords.key', 'r') as f:
     for l in list:
         print(l)
 
-# alias = input("Alias: ")
+# if file exist, return True or else False
 
 def exist(a):
     with open('.passwords/passwords.key', 'r') as f:
