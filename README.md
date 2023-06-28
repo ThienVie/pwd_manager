@@ -35,7 +35,6 @@ Password is successfully added/updated!
 ```
 **!!! Please, remember that I am still learning Python. It means it takes time until this programm can encrypt and decrypt.**
 
-**!!! Also remember that** ***most*** **operating systems are case-intensitive. This means that 'Hello.txt' and 'hello.txt' might be treathed as the same filename.**
 ### **Get Password From Alias**
 In this option you can see your passwords and username. Just write one of your aliases.
 ```
