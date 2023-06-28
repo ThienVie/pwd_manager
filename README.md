@@ -59,8 +59,8 @@ You will remove one of your alias.
 Enter your choice: 4
 Alias: alias/google.what
 ------------------------------------------
-Username: Thien
-Password: 1234567890
+Username: ThienViet
+Password: Hey, it's me.
 
 Are you sure you want to delete it: [y/n]
 ```
