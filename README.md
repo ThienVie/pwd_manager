@@ -1,5 +1,5 @@
 # **Password manager**
-I created a password manager for you and me. Yes, I know it has a few problems, but I will try to solve these problems by learning python. I also said in my profile, that I am still learning python, but I am also greateful, if you can help me.
+I created a password manager and yes, I know it has a few problems, but I will try to solve these problems by learning python. I also said in my profile, that I am still learning python, but I am also greateful, if you can help me.
 
 ## **What does it do?**
 1. First, the programm is looking for a specific folder named '`.passwords`'. I will create a folder, if it doesn't exist. Please, don't be suprise by that. If it exist then we finished the first step and we go to the second step.
