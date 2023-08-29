@@ -1,6 +1,7 @@
 import os
 import json
 
+
 # if file exist, return True or else False
 
 def exist(a):
@@ -16,7 +17,8 @@ def exist(a):
     else:
         return False
 
-# add folder
+
+# add folder/file
 
 def add_folder():
     path = '.passwords'
@@ -25,23 +27,31 @@ def add_folder():
     else:
         return False
 
+def add_file():
+    path = '.passwords/passwords.key'
+    if os.path.exists(path):
+        return True
+    else:
+        return False
+
+
 # add passwords
 
 def add_password():
     print("------------------------------------------")
-    print("If you want to stop this process, then you can press 'controll^ + z' (Mac)")
+    print("If you want to stop this process, then you can press 'control^ + z' (Unix)")
+    print("or 'ctr + c' (Windows).")
     with open('.passwords/passwords.key', 'r') as f:
-        try:
-            password_data = f.read()
-            password_dict = json.loads(password_data.replace("'", '"'))
-        except json.decoder.JSONDecodeError:
-            print('But because there is nothing in the file you can create one safetly.')
+        password_data = f.read()
+        if password_data == '{}':
+            print('But because there is nothing in the file you can create one safely.')
+        password_dict = json.loads(password_data.replace("'", '"'))
     alias = input('Alias: ')
     username = input('Username: ')
     password = input('Password: ')
     password_dict[alias] = {"Username": username, "Password": password}
-    if exist(alias) == True:
-        with open(f'.passwords/passwords.key', 'r') as f:
+    if exist(alias):
+        with open(f'.passwords/passwords.key', 'r'):
             password_dict2 = json.loads(password_data.replace("'", '"'))
             password_dict2 = password_dict2[alias]
             username2 = password_dict2["Username"]
@@ -50,9 +60,9 @@ def add_password():
         if password_dict2["Username"] == username and password_dict2["Password"] == password:
             answer = "Username and Passwords are the same. There will be no changes."
         else:
-            print("There is an alias with the same name Username and Password.")
-            print(f'Username: {username2}')
-            print(f'Password: {password2}')
+            print("There is an alias with the same name:")
+            print(f'Old Username: {username2}')
+            print(f'Old Password: {password2}')
             copy = input("It will be updated. Are you sure you want to update it: [y/n] ")
             if copy == 'y':
                 with open('.passwords/passwords.key', 'w') as f:
@@ -64,7 +74,7 @@ def add_password():
                 answer = 'Thst is an invalid choice. No password will be changed.'
     else:
         with open('.passwords/passwords.key', 'w') as f:
-                f.write(str(password_dict))
+            f.write(str(password_dict))
         answer = "Password is successfully added!"
     print("------------------------------------------")
     print('Result:')
@@ -72,22 +82,24 @@ def add_password():
     print(answer)
     print()
 
+
 def get_password():
-        alias = input("Alias: ")
-        print("------------------------------------------")
-        print("------------------------------------------")
-        if exist(alias):
-            with open('.passwords/passwords.key', 'r') as f:
-                password_data = f.read()
-                password_dict = json.loads(password_data.replace("'", '"'))
-                password_dict = password_dict[alias]
-                username = password_dict["Username"]
-                password = password_dict["Password"]
-                print(f"Username: {username}")
-                print(f"Password: {password}")
-        else:
-            print('Are you sure that it really exist?')
-        print()
+    alias = input("Alias: ")
+    print("------------------------------------------")
+    print("------------------------------------------")
+    if exist(alias):
+        with open('.passwords/passwords.key', 'r') as f:
+            password_data = f.read()
+            password_dict = json.loads(password_data.replace("'", '"'))
+            password_dict = password_dict[alias]
+            username = password_dict["Username"]
+            password = password_dict["Password"]
+            print(f"Username: {username}")
+            print(f"Password: {password}")
+    else:
+        print('Are you sure that it really exist?')
+    print()
+
 
 # show all aliases
 
@@ -103,8 +115,10 @@ def all_password():
         print(l)
     print()
 
+
 # delete alias
 
+# noinspection PyAssignmentToLoopOrWithParameter
 def del_password():
     alias = str(input("Alias: "))
     print("------------------------------------------")
@@ -120,6 +134,7 @@ def del_password():
             print()
             thinking = input("Are you sure you want to delete it: [y/n] ")
             print("------------------------------------------")
+            print('Result:')
             print("------------------------------------------")
             if thinking == "y":
                 del password_dict[alias]
@@ -129,29 +144,57 @@ def del_password():
             elif thinking == "n":
                 print('No deletion and that might be a good choice.')
             else:
-                print("You wrote something wrong. IDK, what you were tiping, but it counts as a 'no' anyway.")
+                print("You wrote something wrong. IDK, what you were typing, but it counts as a 'no' anyway.")
             print()
     else:
         print("------------------------------------------")
         print("Alias doesn't exist.")
         print()
 
+
 # combine everything
 
-while True:
-    if add_folder() == False:
-        os.makedirs('.passwords')
-    print()
-    print("1. Add/Update Alias")
-    print("2. Get Password From Alias")
-    print("3. Show All Aliases")
-    print("4. Remove Alias")
-    print("5. Quit")
-    choice = input("Enter your choice: ")
+def main():
+    try:
+        while True:
+            if not add_folder():
+                os.makedirs('.passwords')
+                open('.passwords/passwords.key', 'w').close()
 
-    if choice == "1":
-        add_password()
-    elif choice == "2":
+            with open('.passwords/passwords.key', 'r+') as f:
+                test = f.read()
+                if test == '':
+                    f.write('{}')
+
+            print()
+            print("1. Add/Update Alias")
+            print("2. Get Password From Alias")
+            print("3. Show All Aliases")
+            print("4. Remove Alias")
+            print("5. Quit")
+            choice = input("Enter your choice: ")
+
+            if choice == "1":
+                add_password()
+            elif choice == "2":
+                get_password()
+            elif choice == "3":
+                all_password()
+            elif choice == "4":
+                del_password()
+            elif choice == "5":
+                break
+            else:
+                print("------------------------------------------")
+                print("Invalid choice. Please try again.")
+                print()
+    except KeyboardInterrupt:
+        print()
+        print('You interrupted this programm. This programm will stop.')
+        
+
+if __name__ == '__main__':
+    main()
         get_password()
     elif choice == "3":
         all_password()
