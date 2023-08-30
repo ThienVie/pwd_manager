@@ -86,6 +86,7 @@ def add_password():
 def get_password():
     alias = input("Alias: ")
     print("------------------------------------------")
+    print("Result:")
     print("------------------------------------------")
     if exist(alias):
         with open('.passwords/passwords.key', 'r') as f:
@@ -105,7 +106,7 @@ def get_password():
 
 def all_password():
     print("------------------------------------------")
-    print("All aliases:")
+    print("Result:")
     print("------------------------------------------")
     with open('.passwords/passwords.key', 'r') as f:
         password_data = f.read()
