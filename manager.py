@@ -195,14 +195,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-        get_password()
-    elif choice == "3":
-        all_password()
-    elif choice == "4":
-        del_password()
-    elif choice == "5":
-        break
-    else:
-        print("------------------------------------------")
-        print("Invalid choice. Please try again.")
-        print()
