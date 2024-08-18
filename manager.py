@@ -17,8 +17,9 @@ def show_result(result, message="") -> None:
 def ctrz(signum="", frame=""):
     print("")
     pyperclip.copy("")
-    print("ctr + z kills this programm. Don't worry, there is nothing in the clipboard. See you next time!")
-    print("It takes some time. :)")
+    message = """ctr + z kills this programm. Don't worry, there is nothing in the clipboard anymore. See you next time!
+It takes some time. :)"""
+    show_result(f"{Fore.RED}ctr + z", message)
     sys.exit(0)
 
 signal.signal(signal.SIGTSTP, ctrz)
@@ -39,6 +40,9 @@ def add_password():
 
     with open('.passwords/passwords.json', 'r') as f:
         data = f.read()
+
+        # decrypt
+
         password_dict = json.loads(data)
         try:
             password_dict[website]
@@ -49,13 +53,17 @@ def add_password():
             user.append(users["Username"])
         if not new_username in user:
             password_dict[website].append({"Username": new_username, "Password": new_password})
+
+            # Encrypt dict
+
             with open('.passwords/passwords.json', 'w') as f:
                 f.write(json.dumps(password_dict, indent=4))
+
             report = f"{Fore.GREEN}Successfull!{Fore.RESET}"
-            answer = "Password is successfully added!"
+            answer = "Password has successfully added to the file!"
             show_result(report, answer)
         else:
-            result = f"{Fore.RED}Username already exist."
+            result = f"{Fore.RED}Username exist"
             message = "Try something else."
             show_result(result, message)
 
@@ -103,10 +111,8 @@ def get_password():
                 message = "Password has been copied to clipboard."
                 show_result(result, message)
             except Exception as e:
-                message = "Website doesn't exist."
-                report = f"{Fore.RED}Error{Fore.RESET}"
-                show_result(report)
-                print(e)
+                report = f"{Fore.RED}Error"
+                show_result(report, e)
             password_dict = {}
     except:
         print("")
@@ -173,11 +179,15 @@ def main():
                     f.write('{}')
 
             print()
-            print("     1. Add a new password")
-            print("     2. Get Password From Alias")
-            print("     3. Show All Aliases")
-            print("     4. Remove Alias")
-            print("     5. Quit\n")
+            print("""
+            1. Add a new password
+            2. Get password from website
+            3. Edit password
+            4. Remove Alias
+            5. Quit
+
+            """)
+
             choice = input("> ")
 
             if choice == "1":
@@ -195,10 +205,12 @@ def main():
                 message = "Invalid choice. Please try again."
                 show_result(result, message)
             pass
-    except KeyboardInterrupt:
+    except KeyboardInterrupt as e:
         print()
-        print('You interrupted this programm. This programm will stop.')
-        print('And clipboard has been cleaned.')
+        message =  f"""You interrupted this programm. This programm will stop.
+Don't worry. Your clipboard has been cleaned, too."""
+        show_result(f"{Fore.RED}KeyboardInterrupt", message)
+        
     pyperclip.copy("")   
         
 
