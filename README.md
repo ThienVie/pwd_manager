@@ -83,12 +83,12 @@ It should do these things:
 ## **My plan**
 This is my plan to finish this project. You can follow me by looking at my plan.
 
-# | My plan
-:-- | :--
-✅ | Alternatives for `.eval()`
-❌ | Make it do what it has to do 
-❌ | Masterkey
-❌ | Encrypt / Decrypt
-❌ | Designs
-❌ | 2FA (Optional)
+| # | My plan |
+|---|---------|
+|✅ | Alternatives for `.eval()`
+|❌ | Make it do what it has to do 
+|❌ | Masterkey
+|❌ | Encrypt / Decrypt
+|❌ | Designs
+|❌ | 2FA (Optional)
 ❌ | Looking for all possible situations
